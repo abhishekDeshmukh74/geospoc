@@ -1,7 +1,7 @@
 import { Validators } from '@angular/forms';
-import { CONSTANTS } from '../app.constants';
+import { CONSTANTS } from 'src/app/app.constants';
 
-export const signupFormValidator = {
+export const registerFormValidator = {
     name: {
         nameValidations: Validators.compose([
             Validators.required,
