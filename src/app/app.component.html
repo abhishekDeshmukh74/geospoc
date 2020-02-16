@@ -1,13 +1,1 @@
-<mat-tab-group>
-    <mat-tab label="CANDIDATE">
-        <ng-container *ngIf="showLogin">
-            <app-login-form [userType]="'CANDIDATE'" (registerClicked)="isRegisterClicked($event)"></app-login-form>
-        </ng-container>
-        <ng-container *ngIf="showRegister">
-            <app-register-form [userType]="'CANDIDATE'"></app-register-form>
-        </ng-container>
-    </mat-tab>
-    <mat-tab label="RECRUITER">
-        <!-- <app-login-form [userType]="'RECRUITER'"></app-login-form> -->
-    </mat-tab>
-</mat-tab-group>
+<router-outlet></router-outlet>

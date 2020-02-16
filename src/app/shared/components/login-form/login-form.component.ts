@@ -23,9 +23,9 @@ export class LoginFormComponent implements OnInit {
   submitted = false;
 
   constructor(
-    private formBuilder: FormBuilder,
     private alertService: AlertService,
     private appService: AppService,
+    private formBuilder: FormBuilder,
     private router: Router,
   ) { }
 
@@ -41,10 +41,19 @@ export class LoginFormComponent implements OnInit {
       return this.alertService.error('Form validations failed');
     }
 
-    this.appService.login({}).subscribe(
+    this.appService.login({
+      email: this.loginForm.controls.email.value,
+      password: this.loginForm.controls.password.value,
+      type: this.userType,
+    }).subscribe(
       (res: any) => {
         this.alertService.success('Login success');
-        this.router.navigate(['/my-profile']);
+        if (this.userType === 'CANDIDATE') {
+          this.router.navigate(['/my-profile']);
+        }
+        if (this.userType === 'RECRUITER') {
+          this.router.navigate(['/candidates']);
+        }
       }
     );
 

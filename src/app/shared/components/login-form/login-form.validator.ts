@@ -13,7 +13,7 @@ export const loginFormValidator = {
         message: 'Email address is required'
       },
       {
-        type: 'pattern',
+        type: 'email',
         message: 'Email address is invalid',
       },
     ],

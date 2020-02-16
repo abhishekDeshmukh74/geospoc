@@ -26,10 +26,14 @@ export class AppService {
   getGEOLocation(ip) {
     // Update your api key to get from https://ipgeolocation.io
     return this.http
-      .get(`https://api.ipgeolocation.io/ipgeo?apiKey=${this.apiKey}&ip=${ip}`)
+      .get<any>(`https://api.ipgeolocation.io/ipgeo?apiKey=${this.apiKey}&ip=${ip}`)
       .pipe(
         catchError(this.handleError)
       );
+  }
+
+  getCandidates() {
+    return this.http.get<any>(`${environment.apiUrl}/candidates`);
   }
 
   login(loginRequest: any) {

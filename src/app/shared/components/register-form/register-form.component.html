@@ -2,6 +2,38 @@
 
     <div>
         <mat-form-field appearance="fill">
+            <mat-label>Email address</mat-label>
+            <input autocomplete="'no'" matInput placeholder="Enter email address" formControlName="email"
+                type="email" />
+            <mat-error *ngFor="let validation of registerFormValidator.email.emailValidationsMessages">
+                <mat-error class="error-message" *ngIf="
+                registrationForm.get('email').hasError(validation.type) &&
+          (registrationForm.get('email').dirty ||
+          registrationForm.get('email').touched ||
+            submitted)
+        ">
+                    {{ validation.message }}
+                </mat-error>
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input autocomplete="current-password" matInput type="password" formControlName="password"
+                placeholder="Password" />
+            <mat-error *ngFor="let validation of registerFormValidator.password.passwordValidationsMessages">
+                <mat-error class="error-message" *ngIf="
+                registrationForm.get('password').hasError(validation.type) && (registrationForm.get('password').dirty || registrationForm.get('password').touched)
+            ">
+                    {{ validation.message }}</mat-error>
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <!-- <div>
+        <mat-form-field appearance="fill">
             <mat-label>Name</mat-label>
             <input autocomplete="off" matInput placeholder="Enter name" formControlName="name" type="text" [ngClass]="{
                     'is-invalid': submitted && registrationForm.get('name').errors
@@ -82,9 +114,9 @@
                 No
             </mat-radio-button>
         </mat-radio-group>
-    </div>
+    </div> -->
 
-    <button class="btn-sm" type="submit" mat-flat-button color="accent" (click)="onLogin()">
+    <button class="btn-sm" type="submit" mat-flat-button color="accent" (click)="onLogin(true)">
         Go to Login
     </button>
 
