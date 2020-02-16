@@ -44,7 +44,7 @@ export class MyProfileComponent implements OnInit {
       return this.alertService.error('Form validations failed');
     }
 
-    this.appService.updateProfile(this.myProfileForm.controls.value).subscribe(
+    this.appService.updateProfile(this.myProfileForm.value).subscribe(
       (res: any) => {
         this.alertService.success('my profile updated');
       }

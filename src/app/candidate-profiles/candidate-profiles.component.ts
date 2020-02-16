@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators';
+
 import { AppService } from '../app.service';
 
 @Component({
@@ -9,14 +12,28 @@ import { AppService } from '../app.service';
 export class CandidateProfilesComponent implements OnInit {
 
   candidates: any[];
+  filteredCandidates: any[];
+
+  searchBoxFormControl = new FormControl('');
 
   constructor(
     private appService: AppService,
   ) { }
 
-
   ngOnInit() {
     this.getCandidates();
+    this.filterCandidates();
+  }
+
+  filterCandidates() {
+    this.searchBoxFormControl
+      .valueChanges
+      .pipe(
+        debounceTime(300)
+      )
+      .subscribe((name: string) => {
+        this.filteredCandidates = this.candidates.filter(candidate => candidate.name = name);
+      });
   }
 
   getCandidates() {

@@ -1,9 +1,15 @@
-<p *ngIf="candidates.length === 0">
-    No candidates found
+<p *ngIf="filteredCandidates.length === 0">
+    No Candidates found
 </p>
 
-<ng-container *ngIf="candidates.length !== 0">
-    <div *ngFor="let candidate of candidates">
+<form>
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Search name" [formControl]="searchBoxFormControl">
+    </mat-form-field>
+</form>
+
+<ng-container *ngIf="filteredCandidates.length !== 0">
+    <div *ngFor="let candidate of filteredCandidates">
         <app-candidate-card [candidate]="candidate"></app-candidate-card>
     </div>
 </ng-container>
