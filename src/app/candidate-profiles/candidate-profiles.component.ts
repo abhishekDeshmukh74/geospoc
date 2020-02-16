@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-candidate-profiles',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CandidateProfilesComponent implements OnInit {
 
-  constructor() { }
+  candidates: any[];
 
-  ngOnInit(): void {
+  constructor(
+    private appService: AppService,
+  ) { }
+
+
+  ngOnInit() {
+    this.getCandidates();
+  }
+
+  getCandidates() {
+    this.appService.getCandidates().subscribe(
+      (res: any) => {
+        this.candidates = res.candidates;
+      }
+    );
   }
 
 }

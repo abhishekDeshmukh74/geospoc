@@ -17,15 +17,17 @@ import { MatRadioModule } from '@angular/material/radio';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginFormModule } from './shared/components/login-form/login-form.module';
 import { RegisterFormModule } from './shared/components/register-form/register-form.module';
-import { CandidatesComponent } from './shared/components/candidates/candidates.component';
-import { HomeComponent } from './shared/components/home/home.component';
+import { HomeComponent } from './home/home.component';
+import { CandidateProfilesComponent } from './candidate-profiles/candidate-profiles.component';
+import { MyProfileComponent } from './my-profile/my-profile.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    CandidatesComponent,
     HomeComponent,
+    CandidateProfilesComponent,
+    MyProfileComponent,
   ],
   imports: [
     BrowserModule,

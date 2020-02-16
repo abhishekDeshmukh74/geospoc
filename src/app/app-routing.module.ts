@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
-import { CandidatesComponent } from './shared/components/candidates/candidates.component';
-import { HomeComponent } from './shared/components/home/home.component';
+import { HomeComponent } from './home/home.component';
+import { CandidateProfilesComponent } from './candidate-profiles/candidate-profiles.component';
+import { MyProfileComponent } from './my-profile/my-profile.component';
 
 const routes: Routes = [
   {
@@ -11,8 +11,12 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
+    path: 'my-profile',
+    component: MyProfileComponent,
+  },
+  {
     path: 'candidates',
-    component: CandidatesComponent,
+    component: CandidateProfilesComponent,
   },
 ];
 
