@@ -29,7 +29,7 @@ export class LoginFormComponent implements OnInit {
     private router: Router,
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.loginForm = this.formBuilder.group({
       email: ['', loginFormValidator.email.emailValidations],
       password: ['', loginFormValidator.password.passwordValidations],

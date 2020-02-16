@@ -31,7 +31,7 @@ export class RegisterFormComponent implements OnInit {
     private router: Router,
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.initRegistrationFormGroup();
     this.getIPAddress();
   }

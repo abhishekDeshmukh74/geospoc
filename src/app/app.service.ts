@@ -32,6 +32,10 @@ export class AppService {
       );
   }
 
+  updateProfile(updateProfileRequest: any) {
+    return this.http.put<any>(`${environment.apiUrl}/my-profile`, updateProfileRequest);
+  }
+
   getCandidates() {
     return this.http.get<any>(`${environment.apiUrl}/candidates`);
   }

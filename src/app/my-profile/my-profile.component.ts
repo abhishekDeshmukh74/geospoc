@@ -12,6 +12,7 @@ import { AppService } from '../app.service';
 })
 export class MyProfileComponent implements OnInit {
 
+  uploadedFileName: string;
   submitted = false;
   loading = false;
   readonly myProfileValidator = myProfileValidator;
@@ -38,5 +39,33 @@ export class MyProfileComponent implements OnInit {
     });
   }
 
+  onUpdate() {
+    if (this.myProfileForm.invalid) {
+      return this.alertService.error('Form validations failed');
+    }
 
+    this.appService.updateProfile(this.myProfileForm.controls.value).subscribe(
+      (res: any) => {
+        this.alertService.success('my profile updated');
+      }
+    );
+  }
+
+  onFileChange(event) {
+    const reader: any = new FileReader();
+    if (event.target.files?.length > 0) {
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = () => {
+
+        this.uploadedFileName = event.target.files[0].name;
+        this.myProfileForm.get('resume')
+          .setValue({
+            filename: event.target.files[0].name,
+            filetype: event.target.files[0].type,
+            filesize: event.target.files[0].size,
+            filedata: reader.result.split(',')[1],
+          });
+      };
+    }
+  }
 }

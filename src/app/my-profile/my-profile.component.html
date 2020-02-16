@@ -1,81 +1,96 @@
-<div>
-    <mat-form-field appearance="fill">
-        <mat-label>Name</mat-label>
-        <input autocomplete="off" matInput placeholder="Enter name" formControlName="name" type="text" [ngClass]="{
+<form [formGroup]="myProfileForm">
+
+    <div>
+        <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input autocomplete="off" matInput placeholder="Enter name" formControlName="name" type="text" [ngClass]="{
                     'is-invalid': submitted && myProfileForm.get('name').errors
                   }" />
-        <mat-error *ngFor="let validation of myProfileValidator.name.nameValidationsMessages">
-            <mat-error class="error-message" *ngIf="
+            <mat-error *ngFor="let validation of myProfileValidator.name.nameValidationsMessages">
+                <mat-error class="error-message" *ngIf="
                   myProfileForm.get('name').hasError(validation.type) &&
                       (myProfileForm.get('name').dirty ||
                       myProfileForm.get('name').touched ||
                         submitted)
                     ">
-                {{ validation.message }}
+                    {{ validation.message }}
+                </mat-error>
             </mat-error>
-        </mat-error>
-    </mat-form-field>
-</div>
+        </mat-form-field>
+    </div>
 
-<div>
-    <mat-form-field appearance="fill">
-        <mat-label>Email address</mat-label>
-        <input autocomplete="'no'" matInput placeholder="Enter email address" formControlName="email" type="email" />
-        <mat-error *ngFor="let validation of myProfileValidator.email.emailValidationsMessages">
-            <mat-error class="error-message" *ngIf="
+    <div>
+        <mat-form-field appearance="fill">
+            <mat-label>Email address</mat-label>
+            <input autocomplete="'no'" matInput placeholder="Enter email address" formControlName="email"
+                type="email" />
+            <mat-error *ngFor="let validation of myProfileValidator.email.emailValidationsMessages">
+                <mat-error class="error-message" *ngIf="
             myProfileForm.get('email').hasError(validation.type) &&
           (myProfileForm.get('email').dirty ||
           myProfileForm.get('email').touched ||
             submitted)
         ">
-                {{ validation.message }}
+                    {{ validation.message }}
+                </mat-error>
             </mat-error>
-        </mat-error>
-    </mat-form-field>
-</div>
+        </mat-form-field>
+    </div>
 
-<div>
-    <mat-form-field appearance="fill">
-        <mat-label>Web address</mat-label>
-        <input autocomplete="'no'" matInput placeholder="Enter web address" formControlName="webAddress" />
-        <mat-error *ngFor="let validation of myProfileValidator.webAddress.webAddressValidationsMessages">
-            <mat-error class="error-message" *ngIf="
+    <div>
+        <mat-form-field appearance="fill">
+            <mat-label>Web address</mat-label>
+            <input autocomplete="'no'" matInput placeholder="Enter web address" formControlName="webAddress" />
+            <mat-error *ngFor="let validation of myProfileValidator.webAddress.webAddressValidationsMessages">
+                <mat-error class="error-message" *ngIf="
             myProfileForm.get('webAddress').hasError(validation.type) &&
           (myProfileForm.get('webAddress').dirty ||
           myProfileForm.get('webAddress').touched ||
             submitted) ">
-                {{ validation.message }}
+                    {{ validation.message }}
+                </mat-error>
             </mat-error>
-        </mat-error>
-    </mat-form-field>
-</div>
+        </mat-form-field>
+    </div>
 
-<div>
-    <mat-form-field appearance="fill">
-        <mat-label>Cover letter</mat-label>
-        <input autocomplete="'no'" matInput placeholder="Enter cover letter" formControlName="coverLetter" />
-        <mat-error *ngFor="let validation of myProfileValidator.coverLetter.coverLetterValidationsMessages">
-            <mat-error class="error-message" *ngIf="
+    <label class="btn btn-primary">
+        Browse
+        <input type="file" onclick="value=null" (change)="onFileChange($event)" hidden>
+    </label>
+
+    <div>
+        <mat-form-field appearance="fill">
+            <mat-label>Cover letter</mat-label>
+            <input autocomplete="'no'" matInput placeholder="Enter cover letter" formControlName="coverLetter" />
+            <mat-error *ngFor="let validation of myProfileValidator.coverLetter.coverLetterValidationsMessages">
+                <mat-error class="error-message" *ngIf="
             myProfileForm.get('coverLetter').hasError(validation.type) &&
           (myProfileForm.get('coverLetter').dirty ||
           myProfileForm.get('coverLetter').touched ||
             submitted)
         ">
-                {{ validation.message }}
+                    {{ validation.message }}
+                </mat-error>
             </mat-error>
-        </mat-error>
-    </mat-form-field>
-</div>
+        </mat-form-field>
+    </div>
 
-<div>
-    <mat-label>Do you like?</mat-label>
-    <mat-radio-group required formControlName="likeWorking" [ngClass]="{
+    <div>
+        <mat-label>Do you like?</mat-label>
+        <mat-radio-group required formControlName="likeWorking" [ngClass]="{
       'is-invalid': submitted && myProfileForm.get('likeWorking').errors
     }">
-        <mat-radio-button value="true" [checked]="myProfileForm.controls.likeWorking.value === true">Yes
-        </mat-radio-button>
-        <mat-radio-button value="false" [checked]="myProfileForm.controls.likeWorking.value === false" class="ml-3">
-            No
-        </mat-radio-button>
-    </mat-radio-group>
-</div>
+            <mat-radio-button value="true" [checked]="myProfileForm.controls.likeWorking.value === true">Yes
+            </mat-radio-button>
+            <mat-radio-button value="false" [checked]="myProfileForm.controls.likeWorking.value === false" class="ml-3">
+                No
+            </mat-radio-button>
+        </mat-radio-group>
+    </div>
+
+    <button class="btn-sm" type="submit" [disabled]="!myProfileForm.valid" mat-flat-button color="accent"
+        (click)="onUpdate()">
+        Update my profile
+    </button>
+
+</form>

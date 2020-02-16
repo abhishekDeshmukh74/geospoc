@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'app-candidate-card',
@@ -8,9 +8,11 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 })
 export class CandidateCardComponent implements OnInit {
 
+  @Input() candidate: string;
+
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
 }

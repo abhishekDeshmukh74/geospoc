@@ -1,1 +1,9 @@
-<p>{{ candidates | json}}</p>
+<p *ngIf="candidates.length === 0">
+    No candidates found
+</p>
+
+<ng-container *ngIf="candidates.length !== 0">
+    <div *ngFor="let candidate of candidates">
+        <app-candidate-card [candidate]="candidate"></app-candidate-card>
+    </div>
+</ng-container>

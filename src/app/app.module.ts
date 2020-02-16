@@ -3,6 +3,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { AppService } from './app.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +21,7 @@ import { RegisterFormModule } from './shared/components/register-form/register-f
 import { HomeComponent } from './home/home.component';
 import { CandidateProfilesComponent } from './candidate-profiles/candidate-profiles.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
+import { CandidateCardModule } from './shared/components/candidate-card/candidate-card.module';
 
 
 @NgModule({
@@ -39,10 +41,12 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
     ReactiveFormsModule,
     MatInputModule,
     RouterModule,
+    CandidateCardModule,
     HttpClientModule,
     LoginFormModule,
     RegisterFormModule,
     MatTabsModule,
+    MatButtonModule,
     MatSnackBarModule,
   ],
   providers: [
