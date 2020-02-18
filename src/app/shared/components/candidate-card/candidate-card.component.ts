@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 import { PDFProgressData } from 'ng2-pdf-viewer';
 
 import { ICandidateProfile } from './candidate-card.interfaces';
+import { CONSTANTS } from '@constants';
 
 @Component({
   selector: 'app-candidate-card',
@@ -24,4 +25,7 @@ export class CandidateCardComponent implements OnInit {
     this.loading = progressData.loaded < progressData.total;
   }
 
+  onResume() {
+    window.open(this.candidate.resume);
+  }
 }

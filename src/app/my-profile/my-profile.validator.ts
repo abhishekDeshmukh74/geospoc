@@ -19,10 +19,17 @@ export const myProfileValidator = {
         ],
     },
     email: {
-        emailValidations: Validators.compose([Validators.email]),
+        emailValidations: Validators.compose([
+            Validators.required,
+            Validators.email
+        ]),
         emailValidationsMessages: [
             {
-                type: 'pattern',
+                type: 'required',
+                message: 'Email address is required'
+            },
+            {
+                type: 'email',
                 message: 'Email address is invalid',
             },
         ],
@@ -30,17 +37,12 @@ export const myProfileValidator = {
     webAddress: {
         webAddressValidations: Validators.compose([
             Validators.required,
-            Validators.pattern(CONSTANTS.REGEX.ALLOW_ONLY_NUMBER_SPACE_CHARACTERS_HYPHEN),
         ]),
         webAddressValidationsMessages: [
             {
                 type: 'required',
                 message: 'Web Address is required',
-            },
-            {
-                type: 'pattern',
-                message: 'Only characters and numbers are allowed',
-            },
+            }
         ],
     },
     coverLetter: {

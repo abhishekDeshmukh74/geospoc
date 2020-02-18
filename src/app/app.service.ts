@@ -17,17 +17,23 @@ export class AppService {
 
   getIpAddress() {
     return this.http
-      .get<any>('https://api.ipify.org/?format=json')
+      .get<any>('https://api.ipify.org/?format=json');
   }
 
   getGEOLocation(ip) {
     // Update your api key to get from https://ipgeolocation.io
     return this.http
-      .get<any>(`https://api.ipgeolocation.io/ipgeo?apiKey=${this.apiKey}&ip=${ip}`)
+      .get<any>(`https://api.ipgeolocation.io/ipgeo?apiKey=${this.apiKey}&ip=${ip}`);
   }
 
   updateProfile(updateProfileRequest: any) {
-    return this.http.put<any>(`${environment.apiUrl}/profile`, updateProfileRequest);
+
+    const body = new FormData();
+    body.set('file', updateProfileRequest.resume, updateProfileRequest.resume.name);
+    delete updateProfileRequest.resume;
+    body.set('data', JSON.stringify(updateProfileRequest));
+
+    return this.http.put<any>(`${environment.apiUrl}/profile`, body);
   }
 
   getCandidates() {

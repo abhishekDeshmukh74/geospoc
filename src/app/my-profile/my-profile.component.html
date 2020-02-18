@@ -1,3 +1,5 @@
+<h1>My Profile</h1>
+
 <form [formGroup]="myProfileForm">
 
     <div>
@@ -22,7 +24,7 @@
     <div>
         <mat-form-field appearance="fill">
             <mat-label>Email address</mat-label>
-            <input autocomplete="'no'" matInput placeholder="Enter email address" formControlName="email"
+            <input autocomplete="'no'" readonly matInput placeholder="Enter email address" formControlName="email"
                 type="email" />
             <mat-error *ngFor="let validation of myProfileValidator.email.emailValidationsMessages">
                 <mat-error class="error-message" *ngIf="
@@ -76,7 +78,7 @@
     </div>
 
     <div>
-        <mat-label>Do you like?</mat-label>
+        <mat-label>Do you like Working?</mat-label>
         <mat-radio-group required formControlName="likeWorking" [ngClass]="{
       'is-invalid': submitted && myProfileForm.get('likeWorking').errors
     }">
@@ -90,6 +92,7 @@
 
     <button class="btn-sm" type="submit" [disabled]="!myProfileForm.valid" mat-flat-button color="accent"
         (click)="onUpdate()">
+        <app-small-spinner *ngIf="isLoading"></app-small-spinner>
         Update my profile
     </button>
 

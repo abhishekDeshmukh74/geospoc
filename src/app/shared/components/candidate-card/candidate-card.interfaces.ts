@@ -4,10 +4,5 @@ export interface ICandidateProfile {
     webAddress: string;
     coverLetter: string;
     likeWorking: boolean;
-    resume: {
-        filename: string;
-        filetype: string;
-        filesize: string;
-        filedata: string;
-    };
+    resume: string;
 }

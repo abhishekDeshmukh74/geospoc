@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
+import { CONSTANTS } from '@constants';
 import { myProfileValidator } from './my-profile.validator';
 import { AlertService } from '../shared/services/alert.service';
 import { AppService } from '../app.service';
@@ -14,9 +15,10 @@ export class MyProfileComponent implements OnInit {
 
   uploadedFileName: string;
   submitted = false;
-  loading = false;
+  isLoading = false;
   readonly myProfileValidator = myProfileValidator;
   myProfileForm: FormGroup;
+  user: any;
 
   constructor(
     private alertService: AlertService,
@@ -25,17 +27,21 @@ export class MyProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.setEmailAddress();
     this.initRegistrationFormGroup();
+  }
+  setEmailAddress() {
+    this.user = JSON.parse(sessionStorage.getItem(CONSTANTS.LOCAL_STORAGE_KEYS.LOGGED_IN_USER));
   }
 
   initRegistrationFormGroup() {
     this.myProfileForm = this.formBuilder.group({
-      name: [null, myProfileValidator.name.nameValidations],
-      email: [null, myProfileValidator.email.emailValidations],
-      webAddress: [null, myProfileValidator.webAddress.webAddressValidations],
-      coverLetter: [null, myProfileValidator.coverLetter.coverLetterValidations],
+      name: [this.user.name, myProfileValidator.name.nameValidations],
+      email: [this.user.email, myProfileValidator.email.emailValidations],
+      webAddress: [this.user.webAddress, myProfileValidator.webAddress.webAddressValidations],
+      coverLetter: [this.user.webAddress, myProfileValidator.coverLetter.coverLetterValidations],
       resume: [null, myProfileValidator.resume.resumeValidations],
-      likeWorking: [null, myProfileValidator.likeWorking.likeWorkingValidations],
+      likeWorking: [this.user.likeWorking, myProfileValidator.likeWorking.likeWorkingValidations],
     });
   }
 
@@ -43,10 +49,19 @@ export class MyProfileComponent implements OnInit {
     if (this.myProfileForm.invalid) {
       return this.alertService.error('Form validations failed');
     }
+    this.isLoading = true;
 
-    this.appService.updateProfile(this.myProfileForm.value).subscribe(
+    this.appService.updateProfile({ ...this.myProfileForm.value, userId: this.user._id }).subscribe(
       (res: any) => {
+        this.isLoading = false;
         this.alertService.success('my profile updated');
+      },
+      (error) => {
+        this.isLoading = false;
+        if (error.status === 400) {
+          return this.alertService.error(error.message);
+        }
+        this.alertService.error('Error in updating profile!');
       }
     );
   }
@@ -58,13 +73,7 @@ export class MyProfileComponent implements OnInit {
       reader.onload = () => {
 
         this.uploadedFileName = event.target.files[0].name;
-        this.myProfileForm.get('resume')
-          .setValue({
-            filename: event.target.files[0].name,
-            filetype: event.target.files[0].type,
-            filesize: event.target.files[0].size,
-            filedata: reader.result.split(',')[1],
-          });
+        this.myProfileForm.get('resume').setValue(event.target.files[0]);
       };
     }
   }

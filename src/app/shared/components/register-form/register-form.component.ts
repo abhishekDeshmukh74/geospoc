@@ -81,8 +81,11 @@ export class RegisterFormComponent implements OnInit {
         this.registrationForm.reset();
       },
       (error) => {
-        this.alertService.error('Error in registration!');
         this.isLoading = false;
+        if (error.status === 400) {
+          return this.alertService.error(error.message);
+        }
+        this.alertService.error('Error in registration!');
       }
     );
 

@@ -1,3 +1,4 @@
+import { MatButtonModule } from '@angular/material/button';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
@@ -12,6 +13,7 @@ import { CandidateCardComponent } from './candidate-card.component';
     CommonModule,
     PdfViewerModule,
     MatCardModule,
+    MatButtonModule,
   ],
   exports: [
     CandidateCardComponent

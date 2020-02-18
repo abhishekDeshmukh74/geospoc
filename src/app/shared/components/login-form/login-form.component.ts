@@ -1,3 +1,4 @@
+import { ThrownError } from './../../interfaces/thrown-error.interface';
 import { AppService } from './../../../app.service';
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -65,9 +66,12 @@ export class LoginFormComponent implements OnInit {
           this.router.navigate(['/candidates']);
         }
       },
-      (error) => {
-        this.alertService.error('Error in Login!');
+      (error: ThrownError) => {
         this.isLoading = false;
+        if (error.status === 400) {
+          return this.alertService.error(error.message);
+        }
+        this.alertService.error('Error in Login!');
       }
     );
 

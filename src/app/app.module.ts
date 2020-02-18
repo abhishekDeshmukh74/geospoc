@@ -1,3 +1,4 @@
+import { SmallSpinnerModule } from './shared/components/small-spinner/small-spinner.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { AppService } from './app.service';
@@ -24,6 +25,8 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
 import { CandidateCardModule } from './shared/components/candidate-card/candidate-card.module';
 import { JwtInterceptor } from './shared/interceptors/jwt.interceptor';
 import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
+import { AuthGuard } from './shared/guards/auth.guard';
+import { RoleGuard } from './shared/guards/role.guard';
 
 
 @NgModule({
@@ -49,16 +52,19 @@ import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
     MatTabsModule,
     ReactiveFormsModule,
     RegisterFormModule,
+    SmallSpinnerModule,
     RouterModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
     AppService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: JwtInterceptor,
-      multi: true,
-    },
+    AuthGuard,
+    RoleGuard,
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: JwtInterceptor,
+    //   multi: true,
+    // },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorInterceptor,
