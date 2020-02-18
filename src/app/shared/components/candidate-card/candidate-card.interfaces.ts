@@ -5,4 +5,5 @@ export interface ICandidateProfile {
     coverLetter: string;
     likeWorking: boolean;
     resume: string;
+    userId: any;
 }

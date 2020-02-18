@@ -5,13 +5,20 @@
         <mat-card-subtitle>{{candidate.email}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-        <p> {{candidate.coverLetter}} </p>
+        <p>IP: {{ candidate.userId.ipAddress }}</p>
+        <p>Latitude: {{ candidate.userId.latitude }}</p>
+        <p>Longitude: {{ candidate.userId.longitude }}</p>
+        <p>Timestamp: {{ candidate.userId.updated_at | date }}</p>
+        <p>{{candidate.coverLetter}} </p>
     </mat-card-content>
     <mat-card-actions>
-        <!-- <pdf-viewer [src]="candidate.resume.filedata" [render-text]="true" style="display: block;" (on-progress)="
-        onProgress($event)">
-        </pdf-viewer> -->
-        <button mat-button (click)="onResume()">View Resume</button>
-        <!-- <button mat-button>SHARE</button> -->
+        <button mat-flat-button color="accent" (click)="onResume()">View Resume</button>
+        <div class="stars">
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+        </div>
     </mat-card-actions>
 </mat-card>
