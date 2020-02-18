@@ -34,7 +34,7 @@ export class CandidateProfilesComponent implements OnInit {
         debounceTime(300)
       )
       .subscribe((name: string) => {
-        this.filteredCandidates = this.candidates.filter(candidate => candidate.name.includes(name));
+        this.filteredCandidates = this.candidates.filter(candidate => name.includes(candidate.name));
       });
   }
 
