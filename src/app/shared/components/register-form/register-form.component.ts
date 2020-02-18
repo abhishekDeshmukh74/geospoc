@@ -79,6 +79,10 @@ export class RegisterFormComponent implements OnInit {
         this.isLoading = false;
         this.alertService.success('Goto Registered email to verify email Id');
         this.registrationForm.reset();
+      },
+      (error) => {
+        this.alertService.error('Error in registration!');
+        this.isLoading = false;
       }
     );
 

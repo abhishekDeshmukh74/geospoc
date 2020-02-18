@@ -15,4 +15,11 @@ export class CONSTANTS {
     ALLOW_ALPHANUMERIC_SLASH_HYPHEN: /^[0-9a-zA-Z/-]+$/,
     ALLOW_ALPHANUMERIC_BUT_NOT_ONLY_NUMERIC: /^(?![0-9]*$)[a-zA-Z0-9]+$/,
   };
+
+  static LOCAL_STORAGE_KEYS = {
+    TOKEN: 'token',
+    LOGIN_STATUS: 'loginStatus',
+    ROLE: 'role',
+    LOGGED_IN_USER: 'loggedInUser',
+  };
 }

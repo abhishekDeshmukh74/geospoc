@@ -1,4 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+    box-sizing: border-box;
+  }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+  .center {
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+  }
+
+  .success-snackbar {
+    background: greenyellow;
+    color: white;
+  }
+
+  .error-snackbar {
+    background: #d93025;
+    color: white;
+  }

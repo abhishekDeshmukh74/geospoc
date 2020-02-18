@@ -1,45 +1,48 @@
-<h2> {{userType}} Login</h2>
+<div class="form">
+    <h2> {{userType}} Login</h2>
 
-<form [formGroup]="loginForm">
-    <div>
-        <mat-form-field appearance="fill">
-            <mat-label>Email address</mat-label>
-            <input autocomplete="'no'" matInput placeholder="Enter email address" formControlName="email"
-                type="email" />
-            <mat-error *ngFor="let validation of loginFormValidator.email.emailValidationsMessages">
-                <mat-error class="error-message" *ngIf="
-            loginForm.get('email').hasError(validation.type) &&
-          (loginForm.get('email').dirty ||
-          loginForm.get('email').touched ||
-            submitted)
-        ">
-                    {{ validation.message }}
-                </mat-error>
-            </mat-error>
-        </mat-form-field>
-    </div>
-
-    <div>
-        <mat-form-field appearance="fill">
-            <mat-label>Password</mat-label>
-            <input autocomplete="current-password" matInput type="password" formControlName="password"
-                placeholder="Password" />
-            <mat-error *ngFor="let validation of loginFormValidator.password.passwordValidationsMessages">
-                <mat-error class="error-message" *ngIf="
-              loginForm.get('password').hasError(validation.type) && (loginForm.get('password').dirty || loginForm.get('password').touched)
+    <form [formGroup]="loginForm">
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Email address</mat-label>
+                <input autocomplete="'no'" matInput placeholder="Enter email address" formControlName="email"
+                    type="email" />
+                <mat-error *ngFor="let validation of loginFormValidator.email.emailValidationsMessages">
+                    <mat-error class="error-message" *ngIf="
+                loginForm.get('email').hasError(validation.type) &&
+              (loginForm.get('email').dirty ||
+              loginForm.get('email').touched ||
+                submitted)
             ">
-                    {{ validation.message }}</mat-error>
-            </mat-error>
-        </mat-form-field>
-    </div>
+                        {{ validation.message }}
+                    </mat-error>
+                </mat-error>
+            </mat-form-field>
+        </div>
 
-    <button class="btn-sm" type="submit" [disabled]="!loginForm.valid" mat-flat-button color="accent"
-        (click)="onLogin()">
-        <app-small-spinner *ngIf="isLoading"></app-small-spinner>
-        Login
-    </button>
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Password</mat-label>
+                <input autocomplete="current-password" matInput type="password" formControlName="password"
+                    placeholder="Password" />
+                <mat-error *ngFor="let validation of loginFormValidator.password.passwordValidationsMessages">
+                    <mat-error class="error-message" *ngIf="
+                  loginForm.get('password').hasError(validation.type) && (loginForm.get('password').dirty || loginForm.get('password').touched)
+                ">
+                        {{ validation.message }}</mat-error>
+                </mat-error>
+            </mat-form-field>
+        </div>
 
-    <button class="btn-sm" type="submit" mat-flat-button color="accent" (click)="onRegister(true)">
-        Go to Register
-    </button>
-</form>
+        <button class="btn-sm" type="submit" [disabled]="!loginForm.valid" mat-flat-button color="accent"
+            (click)="onLogin()">
+            <app-small-spinner *ngIf="isLoading"></app-small-spinner>
+            Login
+        </button>
+
+        <button class="btn-sm" type="submit" mat-flat-button color="accent" (click)="onRegister(true)">
+            Go to Register
+        </button>
+    </form>
+
+</div>

@@ -15,13 +15,15 @@ import { RouterModule } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatRadioModule } from '@angular/material/radio';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginFormModule } from './shared/components/login-form/login-form.module';
 import { RegisterFormModule } from './shared/components/register-form/register-form.module';
 import { HomeComponent } from './home/home.component';
 import { CandidateProfilesComponent } from './candidate-profiles/candidate-profiles.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { CandidateCardModule } from './shared/components/candidate-card/candidate-card.module';
+import { JwtInterceptor } from './shared/interceptors/jwt.interceptor';
+import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
 
 
 @NgModule({
@@ -51,7 +53,17 @@ import { CandidateCardModule } from './shared/components/candidate-card/candidat
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
-    AppService
+    AppService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent]
 })

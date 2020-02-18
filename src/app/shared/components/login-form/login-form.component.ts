@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { loginFormValidator } from './login-form.validator';
 import { AlertService } from '../../services/alert.service';
 import { Router } from '@angular/router';
+import { CONSTANTS } from '@constants';
 
 @Component({
   selector: 'app-login-form',
@@ -48,15 +49,25 @@ export class LoginFormComponent implements OnInit {
       password: this.loginForm.controls.password.value,
       type: this.userType,
     }).subscribe(
-      (res: any) => {
+      (response: any) => {
         this.isLoading = false;
         this.alertService.success('Login success');
+
+        sessionStorage.setItem(CONSTANTS.LOCAL_STORAGE_KEYS.TOKEN, response.token);
+        sessionStorage.setItem(CONSTANTS.LOCAL_STORAGE_KEYS.LOGIN_STATUS, 'true');
+        sessionStorage.setItem(CONSTANTS.LOCAL_STORAGE_KEYS.LOGGED_IN_USER, JSON.stringify(response.existingUser));
+        sessionStorage.setItem(CONSTANTS.LOCAL_STORAGE_KEYS.ROLE, response.existingUser.type);
+
         if (this.userType === 'CANDIDATE') {
           this.router.navigate(['/my-profile']);
         }
         if (this.userType === 'RECRUITER') {
           this.router.navigate(['/candidates']);
         }
+      },
+      (error) => {
+        this.alertService.error('Error in Login!');
+        this.isLoading = false;
       }
     );
 
