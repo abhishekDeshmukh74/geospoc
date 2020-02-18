@@ -18,7 +18,7 @@ export class RegisterFormComponent implements OnInit {
 
   registrationForm: FormGroup;
   submitted = false;
-  loading = false;
+  isLoading = false;
   readonly registerFormValidator = registerFormValidator;
   ipAddress: string;
   latitude: string;
@@ -59,16 +59,9 @@ export class RegisterFormComponent implements OnInit {
     this.registrationForm = this.formBuilder.group({
       email: ['', registerFormValidator.email.emailValidations],
       password: ['', registerFormValidator.password.passwordValidations],
-      ipAddress: ['', registerFormValidator.password.passwordValidations],
-      latitude: ['', registerFormValidator.password.passwordValidations],
-      longitude: ['', registerFormValidator.password.passwordValidations],
-
-      //   name: [null, registerFormValidator.name.nameValidations],
-      //   email: [null, registerFormValidator.email.emailValidations],
-      //   webAddress: [null, registerFormValidator.webAddress.webAddressValidations],
-      //   coverLetter: [null, registerFormValidator.coverLetter.coverLetterValidations],
-      //   resume: [null, registerFormValidator.resume.resumeValidations],
-      //   likeWorking: [null, registerFormValidator.likeWorking.likeWorkingValidations],
+      ipAddress: [''],
+      latitude: [''],
+      longitude: [''],
     });
   }
 
@@ -77,11 +70,13 @@ export class RegisterFormComponent implements OnInit {
       return this.alertService.error('Form validations failed');
     }
 
+    this.isLoading = true;
     this.appService.register({
       ...this.registrationForm.value,
       type: this.userType,
     }).subscribe(
       (res: any) => {
+        this.isLoading = false;
         this.alertService.success('Goto Registered email to verify email Id');
         this.registrationForm.reset();
       }

@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { SmallSpinnerModule } from '../small-spinner/small-spinner.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatFormFieldModule,
     MatRadioModule,
     MatButtonModule,
+    SmallSpinnerModule,
     ReactiveFormsModule,
   ],
   exports: [

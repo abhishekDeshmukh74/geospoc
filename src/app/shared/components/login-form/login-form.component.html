@@ -1,3 +1,5 @@
+<h2> {{userType}} Login</h2>
+
 <form [formGroup]="loginForm">
     <div>
         <mat-form-field appearance="fill">
@@ -33,6 +35,7 @@
 
     <button class="btn-sm" type="submit" [disabled]="!loginForm.valid" mat-flat-button color="accent"
         (click)="onLogin()">
+        <app-small-spinner *ngIf="isLoading"></app-small-spinner>
         Login
     </button>
 

@@ -21,6 +21,7 @@ export class LoginFormComponent implements OnInit {
   loginForm: FormGroup;
   readonly loginFormValidator = loginFormValidator;
   submitted = false;
+  isLoading = false;
 
   constructor(
     private alertService: AlertService,
@@ -41,12 +42,14 @@ export class LoginFormComponent implements OnInit {
       return this.alertService.error('Form validations failed');
     }
 
+    this.isLoading = true;
     this.appService.login({
       email: this.loginForm.controls.email.value,
       password: this.loginForm.controls.password.value,
       type: this.userType,
     }).subscribe(
       (res: any) => {
+        this.isLoading = false;
         this.alertService.success('Login success');
         if (this.userType === 'CANDIDATE') {
           this.router.navigate(['/my-profile']);

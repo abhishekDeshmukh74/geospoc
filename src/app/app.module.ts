@@ -8,9 +8,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
+import { environment } from '@environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -32,22 +32,23 @@ import { CandidateCardModule } from './shared/components/candidate-card/candidat
     MyProfileComponent,
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     BrowserAnimationsModule,
-    MatRadioModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    RouterModule,
+    BrowserModule,
     CandidateCardModule,
+    FormsModule,
     HttpClientModule,
     LoginFormModule,
-    RegisterFormModule,
-    MatTabsModule,
     MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRadioModule,
     MatSnackBarModule,
+    MatTabsModule,
+    ReactiveFormsModule,
+    RegisterFormModule,
+    RouterModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
     AppService

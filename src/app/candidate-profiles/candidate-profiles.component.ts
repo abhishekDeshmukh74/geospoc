@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 
 import { AppService } from '../app.service';
+import { ICandidateProfile } from '../shared/components/candidate-card/candidate-card.interfaces';
 
 @Component({
   selector: 'app-candidate-profiles',
@@ -11,8 +12,9 @@ import { AppService } from '../app.service';
 })
 export class CandidateProfilesComponent implements OnInit {
 
-  candidates: any[];
-  filteredCandidates: any[];
+  candidates: ICandidateProfile[] = [];
+  filteredCandidates: ICandidateProfile[] = [];
+
 
   searchBoxFormControl = new FormControl('');
 
@@ -32,7 +34,7 @@ export class CandidateProfilesComponent implements OnInit {
         debounceTime(300)
       )
       .subscribe((name: string) => {
-        this.filteredCandidates = this.candidates.filter(candidate => candidate.name = name);
+        this.filteredCandidates = this.candidates.filter(candidate => candidate.name.includes(name));
       });
   }
 
@@ -40,6 +42,7 @@ export class CandidateProfilesComponent implements OnInit {
     this.appService.getCandidates().subscribe(
       (res: any) => {
         this.candidates = res.candidates;
+        this.filteredCandidates = this.candidates;
       }
     );
   }

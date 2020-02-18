@@ -1,1 +1,15 @@
-<p>candidate-card works!</p>
+<mat-card class="example-card">
+    <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{candidate.name}}</mat-card-title>
+        <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+    </mat-card-header>
+    <mat-card-content>
+        <p> {{candidate.coverLetter}} </p>
+    </mat-card-content>
+    <mat-card-actions>
+        <pdf-viewer [src]="candidate.resume.filedata" [render-text]="true" style="display: block;" (on-progress)="
+        onProgress($event)">
+        </pdf-viewer>
+    </mat-card-actions>
+</mat-card>
